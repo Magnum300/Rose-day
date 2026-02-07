@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My PoGo ❤️</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ffd6e0,#ffeaf4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    text-align:center;
+}
+
+.container{
+    max-width:90%;
+}
+
+button{
+    padding:16px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:12px;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.section{
+    display:none;
+    animation:fade 2s ease;
+}
+
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.rose{
+    font-size:140px;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+.name{
+    font-size:42px;
+    color:#d6336c;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{text-shadow:0 0 10px pink;}
+    to{text-shadow:0 0 25px red;}
+}
+
+#message{
+    font-size:24px;
+    color:#c9184a;
+    margin-top:15px;
+    min-height:70px;
+}
+
+.petal{
+    position:absolute;
+    font-size:24px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
+
+input{
+    padding:12px;
+    font-size:18px;
+    border-radius:8px;
+    border:1px solid pink;
+    margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen">
+    <h2>Enter Secret Love Password ❤️</h2>
+    <input type="password" id="password">
+    <br><br>
+    <button onclick="checkPassword()">Unlock</button>
+</div>
+
+<!-- LEVEL 1 -->
+<div id="level1" class="section">
+    <div class="name">For My PoGo ❤️</div>
+    <br>
+    <button onclick="nextLevel(2)">Click For Surprise 🌹</button>
+</div>
+
+<!-- LEVEL 2 -->
+<div id="level2" class="section">
+    <h2>I Have Something Special For You 💌</h2>
+    <button onclick="nextLevel(3)">Open It ❤️</button>
+</div>
+
+<!-- LEVEL 3 -->
+<div id="level3" class="section">
+    <h2>One More Thing...</h2>
+    <button onclick="nextLevel(4)">Final Surprise 🌹</button>
+</div>
+
+<!-- FINAL LEVEL -->
+<div id="level4" class="section">
+    <div class="rose">🌹</div>
+    <div id="message"></div>
+</div>
+
+</div>
+
+<!-- Tum Mile Song -->
+<iframe id="ytMusic" width="0" height="0"
+src="https://www.youtube.com/embed/9Y0Qm4zJQwE?enablejsapi=1&loop=1&playlist=9Y0Qm4zJQwE"
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<script>
+
+/* PASSWORD */
+function checkPassword(){
+    let pass=document.getElementById("password").value;
+
+    if(pass==="PoGo"){
+        document.getElementById("lockScreen").style.display="none";
+        document.getElementById("level1").style.display="block";
+    }
+    else{
+        alert("Wrong Password ❤️ Try Again");
+    }
+}
+
+/* LEVEL CONTROL */
+function nextLevel(level){
+
+    document.querySelectorAll(".section").forEach(sec=>sec.style.display="none");
+
+    document.getElementById("level"+level).style.display="block";
+
+    if(level===4){
+        startMusic();
+        typeText();
+    }
+}
+
+/* Start Tum Mile Song */
+function startMusic(){
+    let frame=document.getElementById("ytMusic");
+    frame.src += "&autoplay=1";
+}
+
+/* Typing Message */
+const text="Happy Rose Day PoGo ❤️ Even though 3000 km separates us, my love reaches you every moment. You are the most beautiful rose of my life and my forever happiness.";
+
+let i=0;
+
+function typeText(){
+    if(i<text.length){
+        document.getElementById("message").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeText,50);
+    }
+}
+
+/* Falling Rose Petals */
+setInterval(()=>{
+    let petal=document.createElement("div");
+    petal.innerHTML="🌹";
+    petal.classList.add("petal");
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(Math.random()*3+3)+"s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>petal.remove(),6000);
+
+},400);
+
+</script>
+
+</body>
+</html>
